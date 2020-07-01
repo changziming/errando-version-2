@@ -5,12 +5,12 @@ const path = require('path');
 //require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 8080;
 
 app.use(express.json());
 
 const uri = process.env.MONGODB_URI || 'mongodb://heroku_cqkqpp8h:pleudugi2ic3v5ijflntml0u65@ds113749.mlab.com:13749/heroku_cqkqpp8h'; // || 'mongodb+srv://Sean:9F!whuyvC6jZRdZ@cluster0-46pry.mongodb.net/test?retryWrites=true&w=majority';
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 );
 const connection = mongoose.connection;
 connection.once('open', () => {

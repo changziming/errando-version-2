@@ -2,7 +2,7 @@ import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route} from "react-router-dom";
 
-import Navbar from "./components/navbar.component"
+import Navbar from "./components/navbar.component";
 import ErrandsList from "./components/errands-list.component";
 import EditErrand from "./components/edit-errand.component";
 import CreateErrand from "./components/create-errand.component";
