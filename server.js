@@ -20,8 +20,8 @@ connection.once('open', () => {
 const errandsRouter = require('./routes/errands');
 const usersRouter = require('./routes/users');
 
-app.use('/api/errands', errandsRouter);
-app.use('/api/users', usersRouter);
+app.use('/errands', errandsRouter);
+app.use('/users', usersRouter);
 
 // test code to deploy to heroku
 if (process.env.NODE_ENV === 'production') {
