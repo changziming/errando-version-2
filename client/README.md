@@ -7,10 +7,10 @@ Altered to enable it to be deployed to heroku
 
 ## Steps to Deploy locally
 
-/n run `npm install` in root directory
-/n cd client and run `npm install`
-in the client folder run `npm run build`
-cd .. and run npm start
+run `npm install` in root directory  
+cd client and run `npm install`  
+in the client folder run `npm run build`  
+cd .. and run npm start  
 
 
 
