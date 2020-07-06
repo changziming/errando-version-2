@@ -52,4 +52,9 @@ router.post('/update/:id', (req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// If no API routes are hit, send the React app
+router.use(function(req, res) {
+	res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+
 module.exports = router;

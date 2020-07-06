@@ -89,7 +89,7 @@ export default class EditErrand extends Component {
     axios.post('/errands/update/' + this.props.match.params.id, errands)
       .then(res => console.log(res.data));
 
-    window.location = '/errands';
+    window.location = '/errand';
   }
 
   render() {
