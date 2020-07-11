@@ -1,5 +1,6 @@
 const router = require('express').Router();
 let Errands = require('../models/errands.model');
+const auth = require('../middleware/auth');
 
 router.get('/', (req, res) => {
   Errands.find()
