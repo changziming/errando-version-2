@@ -12,10 +12,14 @@ import Homepage from "./components/homepage.component";
 function App() {
   return (
     <Router>
-      <div className="container">
+      <div>
       <Navbar />
-      <br/>
+      </div>
+      <div>
       <Route path="/" exact component={Homepage} />
+      </div>
+      <br/>
+      <div className="container">
       <Route path="/errand" component={ErrandsList} />
       <Route path="/edit/:id" component={EditErrand} />
       <Route path="/create" component={CreateErrand} />

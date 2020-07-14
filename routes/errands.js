@@ -3,27 +3,34 @@ let Errands = require('../models/errands.model');
 const auth = require('../middleware/auth');
 
 router.get('/', (req, res) => {
-  Errands.find()
+  Errands.find({})
     .then(errands => res.json(errands))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// MIght need to change the post route
 router.post('/add', (req, res) => {
-  const username = req.body.username;
+  const username = req.body.username; // Need to change this part
   const description = req.body.description;
   const duration = Number(req.body.duration);
-  const date = Date.parse(req.body.date);
+  const deadline = Date.parse(req.body.deadline);
+  const location = req.body.location;
+  const difficulty = req.body.difficulty;
+  const urgency = req.body.urgency;
 
   const newErrands = new Errands({
-    username,
+    username, // And this part
     description,
     duration,
-    date,
+    deadline,
+    location,
+    difficulty,
+    urgency
   });
 
   newErrands.save()
-  .then(() => res.json('Errand added!'))
-  .catch(err => res.status(400).json('Error: ' + err));
+    .then(() => res.json('Errand added!'))
+    .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.get('/:id', (req, res) => {
@@ -41,10 +48,13 @@ router.delete('/:id', (req, res) => {
 router.post('/update/:id', (req, res) => {
   Errands.findById(req.params.id)
     .then(errands => {
-      errands.username = req.body.username;
+      errands.username = req.body.username;// Change this to reference user _id instead
       errands.description = req.body.description;
       errands.duration = Number(req.body.duration);
-      errands.date = Date.parse(req.body.date);
+      errands.deadline = Date.parse(req.body.deadline);
+      errands.location = req.body.location;
+      errands.difficulty = req.body.difficulty;
+      errands.urgency = req.body.urgency;
 
       errands.save()
         .then(() => res.json('Errand updated!'))

@@ -7,17 +7,18 @@ const auth = require('../middleware/auth');
 
 
 router.get('/', (req, res) => {
-  User.find()
-    .then(users => res.json(users))
+  User.find({})
+    .select('username && email && phoneNumber')
+    .then(user => res.json(user))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
 // Registering new user
 router.post('/add', (req, res) => {
-  const {username, email, password} = req.body;
+  const {username, email, phoneNumber, password} = req.body;
 
   // Validation of new user
-  if(!username || !email || !password) {
+  if(!username || !email || !phoneNumber || !password) {
     return res.status(400).json({ msg: 'Please enter all fields' })
   }
 
@@ -27,9 +28,15 @@ router.post('/add', (req, res) => {
       if(user) return res.status(400).json({ msg: 'Email already exists' });
   });
 
+  User.findOne({phoneNumber})
+  .then(user => {
+    if(user) return res.status(400).json({ msg: 'Phone number already exists' });
+  });
+
   const newUser = new User({
     username,
     email,
+    phoneNumber,
     password
   })
   
@@ -44,7 +51,7 @@ router.post('/add', (req, res) => {
           jwt.sign(
             { id: user.id },
             config.get('jwtSecret'),
-            { expiresIn: 600 }, // expires in 10 mins
+            //{ expiresIn: 600 }, // expires in 10 mins
             (err, token) => {
               if(err) throw err;
               res.json('User added!')
@@ -56,7 +63,7 @@ router.post('/add', (req, res) => {
   })
 });
 
-router.delete('/:id', auth, (req, res) => {
+router.delete('/:id', (req, res) => {
   User.findByIdAndDelete(req.params.id)
     .then(() => res.json('User deleted.'))
     .catch(err => res.status(400).json('Error: ' + err));

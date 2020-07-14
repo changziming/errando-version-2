@@ -7,7 +7,10 @@ const Errands = props => (
     <td>{props.errands.username}</td>
     <td>{props.errands.description}</td>
     <td>{props.errands.duration}</td>
-    <td>{props.errands.date.substring(0,10)}</td>
+    <td>{props.errands.deadline.substring(0,10)}</td>
+    <td>{props.errands.location}</td>
+    <td>{props.errands.difficulty}</td>
+    <td>{props.errands.urgency}</td>
     <td>
       <Link to={"/edit/"+props.errands._id}>edit</Link> | <a href="#" onClick={() => { props.deleteErrands(props.errands._id) }}>delete</a>
     </td>
@@ -58,7 +61,10 @@ export default class ErrandsList extends Component {
               <th>Username</th>
               <th>Description</th>
               <th>Duration</th>
-              <th>Date</th>
+              <th>Deadline</th>
+              <th>Location</th>
+              <th>Difficult</th>
+              <th>Urgency</th>
               <th>Actions</th>
             </tr>
           </thead>
