@@ -10,14 +10,20 @@ export default class EditErrand extends Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeDuration = this.onChangeDuration.bind(this);
-    this.onChangeDate = this.onChangeDate.bind(this);
+    this.onChangeDeadline = this.onChangeDeadline.bind(this);
+    this.onChangeLocation = this.onChangeLocation.bind(this);
+    this.onChangeDifficulty = this.onChangeDifficulty.bind(this);
+    this.onChangeUrgency = this.onChangeUrgency.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       username: '',
       description: '',
       duration: 0,
-      date: new Date(),
+      deadline: new Date(),
+      location: '',
+      difficulty: '',
+      urgency: '',
       users: []
     }
   }
@@ -29,7 +35,10 @@ export default class EditErrand extends Component {
           username: response.data.username,
           description: response.data.description,
           duration: response.data.duration,
-          date: new Date(response.data.date)
+          deadline: new Date(response.data.deadline),
+          location: response.data.location,
+          difficulty:response.data.difficulty,
+          urgency: response.data.location
         })   
       })
       .catch(function (error) {
@@ -68,9 +77,27 @@ export default class EditErrand extends Component {
     })
   }
 
-  onChangeDate(date) {
+  onChangeDeadline(date) {
     this.setState({
       date: date
+    })
+  }
+
+  onChangeLocation(e) {
+    this.setState({
+      location: e.target.value
+    })
+  }
+
+  onChangeDifficulty(e) {
+    this.setState({
+      difficulty: e.target.value
+    })
+  }
+
+  onChangeUrgency(e) {
+    this.setState({
+      urgency: e.target.value
     })
   }
 
@@ -81,7 +108,10 @@ export default class EditErrand extends Component {
       username: this.state.username,
       description: this.state.description,
       duration: this.state.duration,
-      date: this.state.date
+      deadline: this.state.deadline,
+      location: this.state.location,
+      difficulty: this.state.difficulty,
+      urgency: this.state.urgency,
     }
 
     console.log(errands);
@@ -133,13 +163,52 @@ export default class EditErrand extends Component {
               />
         </div>
         <div className="form-group">
-          <label>Date: </label>
+          <label>Deadline: </label>
           <div>
             <DatePicker
-              selected={this.state.date}
-              onChange={this.onChangeDate}
+              selected={this.state.deadline}
+              onChange={this.onChangeDeadline}
             />
           </div>
+        </div>
+        <div className="form-group"> 
+          <label>Location: </label>
+          <input  type="text"
+              required
+              className="form-control"
+              value={this.state.location}
+              onChange={this.onChangeLocation}
+              />
+        </div>
+
+        <div className="form-group"> 
+          <label>Difficulty: </label>
+          <select ref={this.inputRef}
+              required
+              className="form-control"
+              value={this.state.difficulty}
+              onChange={this.onChangeDifficulty}>
+                <option value='Too Easy'>Too Easy</option>
+                <option value="Easy">Easy</option>
+                <option value="Moderate">Moderate</option>
+                <option value="Difficult">Difficult</option>
+                <option value="Very Difficult">Very Difficult</option>
+          </select>
+        </div>
+
+        <div className="form-group"> 
+          <label>Urgency: </label>
+          <select ref={this.inputRef}
+              required
+              className="form-control"
+              value={this.state.urgency}
+              onChange={this.onChangeUrgency}>
+                <option value="No time limit">No time limit</option>
+                <option value="Can Wait">Can Wait</option>
+                <option value="Moderate">Moderate</option>
+                <option value="Urgent">Urgent</option>
+                <option value="Very Urgent">Very Urgent</option>
+          </select>
         </div>
 
         <div className="form-group">

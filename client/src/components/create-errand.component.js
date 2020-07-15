@@ -150,10 +150,10 @@ export default class CreateErrand extends Component {
               />
         </div>
         <div className="form-group">
-          <label>Date: </label>
+          <label>Deadline: </label>
           <div>
             <DatePicker
-              selected={this.state.date}
+              selected={this.state.deadline}
               onChange={this.onChangeDeadline}
             />
           </div>

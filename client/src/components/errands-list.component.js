@@ -63,7 +63,7 @@ export default class ErrandsList extends Component {
               <th>Duration</th>
               <th>Deadline</th>
               <th>Location</th>
-              <th>Difficult</th>
+              <th>Difficulty</th>
               <th>Urgency</th>
               <th>Actions</th>
             </tr>
