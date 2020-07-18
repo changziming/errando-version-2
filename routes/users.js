@@ -39,28 +39,9 @@ router.post('/add', (req, res) => {
     phoneNumber,
     password
   })
-  
-  //Create salt and hash
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(newUser.password, salt, (err, hash) => {
-      if(err) throw err;
-      newUser.password = hash;
-      newUser.save()
-        .then(user => {
-
-          jwt.sign(
-            { id: user.id },
-            config.get('jwtSecret'),
-            //{ expiresIn: 600 }, // expires in 10 mins
-            (err, token) => {
-              if(err) throw err;
-              res.json('User added!')
-            }
-          )
-        })
-        .catch(err => res.status(400).json('Error: ' + err));
-    })
-  })
+  newUser.save()
+    .then(user => res.json('User added!'))
+    .catch(err => res.status(400).json('Error: ' + err))
 });
 
 router.delete('/:id', (req, res) => {

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import RegisterModal from './auth/RegisterModal';
+import Logout from './auth/Logout';
+import { NavItem } from 'reactstrap';
 
 export default class Navbar extends Component {
 
@@ -19,6 +22,12 @@ export default class Navbar extends Component {
           <Link to="/user" className="nav-link">Create User</Link>
           </li>
         </ul>
+        <NavItem>
+          <RegisterModal/>
+        </NavItem>
+        <NavItem>
+          <Logout/>
+        </NavItem>
         </div>
       </nav>
     );

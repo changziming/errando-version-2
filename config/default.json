@@ -1,4 +1,4 @@
 {
-  "mongoURI": "mongodb://heroku_4rklqx8x:85hrrk7gvsov61m3mmosboc1j8@ds013918.mlab.com:13918/heroku_4rklqx8x",
+  "mongoURI": "mongodb+srv://changziming:orbital2020@errando.uzlb9.mongodb.net/heroku_4rklqx8x?retryWrites=true&w=majority",
   "jwtSecret": "secretToken"
 }
