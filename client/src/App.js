@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/authActions';
 
-import Navbar from "./components/navbar.component";
+import Navibar from "./components/navbar.component";
 import ErrandsList from "./components/errands-list.component";
 import EditErrand from "./components/edit-errand.component";
 import CreateErrand from "./components/create-errand.component";
@@ -22,7 +22,7 @@ export default class App extends Component {
       <Provider store={store}>
         <Router>
           <div>
-          <Navbar />
+          <Navibar />
           </div>
           <div>
           <Route path="/" exact component={Homepage} />
