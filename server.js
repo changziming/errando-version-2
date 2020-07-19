@@ -10,7 +10,7 @@ const port = process.env.PORT || 8080;
 
 app.use(express.json());
 
-const uri = process.env.ATLAS_URI || config.get('mongoURI');
+const uri = process.env.MONGODB_URL || config.get('mongoURI');
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 );
 const connection = mongoose.connection;
