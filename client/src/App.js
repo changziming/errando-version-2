@@ -8,6 +8,7 @@ import { loadUser } from './actions/authActions';
 import Navibar from "./components/navbar.component";
 import ErrandsList from "./components/errands-list.component";
 import EditErrand from "./components/edit-errand.component";
+import ErrandDetails from "./components/errand-details.component";
 import CreateErrand from "./components/create-errand.component";
 import CreateUser from "./components/create-user.component";
 import Homepage from "./components/homepage.component";
@@ -31,6 +32,7 @@ export default class App extends Component {
           <div className="container">
           <Route path="/errand" component={ErrandsList} />
           <Route path="/edit/:id" component={EditErrand} />
+          <Route path="/details/:id" component={ErrandDetails} />
           <Route path="/create" component={CreateErrand} />
           <Route path="/user" component={CreateUser} />
           </div>

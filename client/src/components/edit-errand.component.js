@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
-export default class EditErrand extends Component {
+class EditErrand extends Component {
   constructor(props) {
     super(props);
 
@@ -24,7 +26,6 @@ export default class EditErrand extends Component {
       location: '',
       difficulty: '',
       urgency: '',
-      users: []
     }
   }
 
@@ -44,19 +45,10 @@ export default class EditErrand extends Component {
       .catch(function (error) {
         console.log(error);
       })
+  }
 
-    axios.get('/users/')
-      .then(response => {
-        if (response.data.length > 0) {
-          this.setState({
-            users: response.data.map(user => user.username),
-          })
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-
+  static propTypes = {
+    auth: PropTypes.object.isRequired
   }
 
   onChangeUsername(e) {
@@ -123,6 +115,8 @@ export default class EditErrand extends Component {
   }
 
   render() {
+    const { user } = this.props.auth;
+
     return (
     <div>
       <h3>Edit Errand Log</h3>
@@ -132,16 +126,9 @@ export default class EditErrand extends Component {
           <select ref="userInput"
               required
               className="form-control"
-              value={this.state.username}
+              value={ user ? `${user.username}` : '' }
               onChange={this.onChangeUsername}>
-              {
-                this.state.users.map(function(user) {
-                  return <option 
-                    key={user}
-                    value={user}>{user}
-                    </option>;
-                })
-              }
+                <option>{ user ? `${user.username}` : '' }</option>
           </select>
         </div>
         <div className="form-group"> 
@@ -219,3 +206,9 @@ export default class EditErrand extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps, null)(EditErrand);

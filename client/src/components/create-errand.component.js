@@ -25,27 +25,8 @@ class CreateErrand extends Component {
       deadline: new Date(),
       location: '',
       difficulty: 'Too Easy',
-      urgency: 'No time limit',
-      users: []
+      urgency: 'No time limit'
     };
-
-    this.inputRef = React.createRef();
-  }
-
-  componentDidMount() {
-    axios.get('/users/')
-      .then(response => {
-        if (response.data.length > 0) {
-          this.setState({
-            users: response.data.map(user => user.username),
-            username: response.data[0].username
-          })
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-
   }
 
   static propTypes = {
@@ -98,7 +79,7 @@ class CreateErrand extends Component {
     e.preventDefault();
 
     const errands = {
-      username: this.state.username,
+      username: this.props.auth.user.username,
       description: this.state.description,
       duration: this.state.duration,
       deadline: this.state.deadline,
@@ -124,12 +105,12 @@ class CreateErrand extends Component {
       <form onSubmit={this.onSubmit}>
         <div className="form-group"> 
           <label>Username: </label>
-          <select ref={this.inputRef}
+          <select
               required
               className="form-control"
               value={ user ? `${user.username}` : '' }
               onChange={this.onChangeUsername}>
-                <option>{ user ? `${user.username}` : '' }</option>
+              <option>{ user ? `${user.username}` : '' }</option>
           </select>
         </div>
         <div className="form-group"> 

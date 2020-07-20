@@ -12,7 +12,7 @@ const Errands = props => (
     <td>{props.errands.difficulty}</td>
     <td>{props.errands.urgency}</td>
     <td>
-      <Link to={"/edit/"+props.errands._id}>edit</Link> | <Link to="#" onClick={() => { props.deleteErrands(props.errands._id) }}>delete</Link>
+      <Link to={'/details/'+props.errands._id}>Details</Link>
     </td>
   </tr>
 )
