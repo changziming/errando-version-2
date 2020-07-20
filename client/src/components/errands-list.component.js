@@ -12,7 +12,7 @@ const Errands = props => (
     <td>{props.errands.difficulty}</td>
     <td>{props.errands.urgency}</td>
     <td>
-      <Link to={"/edit/"+props.errands._id}>edit</Link> | <a href="#" onClick={() => { props.deleteErrands(props.errands._id) }}>delete</a>
+      <Link to={"/edit/"+props.errands._id}>edit</Link> | <Link to="#" onClick={() => { props.deleteErrands(props.errands._id) }}>delete</Link>
     </td>
   </tr>
 )
@@ -54,7 +54,7 @@ export default class ErrandsList extends Component {
   render() {
     return (
       <div>
-        <h3>Logged Errands</h3>
+        <h3>Errands List</h3>
         <table className="table">
           <thead className="thead-light">
             <tr>

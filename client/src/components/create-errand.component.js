@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
-export default class CreateErrand extends Component {
+class CreateErrand extends Component {
   constructor(props) {
     super(props);
 
@@ -44,6 +46,10 @@ export default class CreateErrand extends Component {
         console.log(error);
       })
 
+  }
+
+  static propTypes = {
+    auth: PropTypes.object.isRequired
   }
 
   onChangeUsername(e) {
@@ -110,6 +116,8 @@ export default class CreateErrand extends Component {
   }
 
   render() {
+    const { user } = this.props.auth;
+
     return (
     <div>
       <h3>Post A New Errand</h3>
@@ -119,16 +127,9 @@ export default class CreateErrand extends Component {
           <select ref={this.inputRef}
               required
               className="form-control"
-              value={this.state.username}
+              value={ user ? `${user.username}` : '' }
               onChange={this.onChangeUsername}>
-              {
-                this.state.users.map(function(user) {
-                  return <option 
-                    key={user}
-                    value={user}>{user}
-                    </option>;
-                })
-              }
+                <option>{ user ? `${user.username}` : '' }</option>
           </select>
         </div>
         <div className="form-group"> 
@@ -206,3 +207,9 @@ export default class CreateErrand extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps, null)(CreateErrand);

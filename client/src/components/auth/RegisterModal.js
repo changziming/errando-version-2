@@ -102,7 +102,6 @@ class RegisterModal extends Component {
                   type="text"
                   name="username"
                   id="username"
-                  placeholder="Username"
                   className="mb-3"
                   onChange={this.onChange}
                 />
@@ -112,7 +111,6 @@ class RegisterModal extends Component {
                   type="email"
                   name="email"
                   id="email"
-                  placeholder="Email"
                   className="mb-3"
                   onChange={this.onChange}
                 />
@@ -122,7 +120,6 @@ class RegisterModal extends Component {
                   type="text"
                   name="phoneNumber"
                   id="phoneNumber"
-                  placeholder="Phone Number"
                   className="mb-3"
                   onChange={this.onChange}
                 />
@@ -132,7 +129,6 @@ class RegisterModal extends Component {
                   type="password"
                   name="password"
                   id="password"
-                  placeholder="Password"
                   className="mb-3"
                   onChange={this.onChange}
                 />
