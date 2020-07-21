@@ -6,11 +6,9 @@ const Errands = props => (
   <tr>
     <td>{props.errands.username}</td>
     <td>{props.errands.description}</td>
-    <td>{props.errands.duration}</td>
     <td>{props.errands.deadline.substring(0,10)}</td>
     <td>{props.errands.location}</td>
-    <td>{props.errands.difficulty}</td>
-    <td>{props.errands.urgency}</td>
+    <td>{props.errands.status}</td>
     <td>
       <Link to={'/details/'+props.errands._id}>Details</Link>
     </td>
@@ -20,8 +18,6 @@ const Errands = props => (
 export default class ErrandsList extends Component {
   constructor(props) {
     super(props);
-
-    this.deleteErrands = this.deleteErrands.bind(this)
 
     this.state = {errands: []};
   }
@@ -36,18 +32,10 @@ export default class ErrandsList extends Component {
       })
   }
 
-  deleteErrands(id) {
-    axios.delete('/errands/'+id)
-      .then(response => { console.log(response.data)});
-
-    this.setState({
-      errands: this.state.errands.filter(el => el._id !== id)
-    })
-  }
 
   errandsList() {
     return this.state.errands.map(currenterrands => {
-      return <Errands errands={currenterrands} deleteErrands={this.deleteErrands} key={currenterrands._id}/>;
+      return <Errands errands={currenterrands} key={currenterrands._id}/>;
     })
   }
 
@@ -58,14 +46,12 @@ export default class ErrandsList extends Component {
         <table className="table">
           <thead className="thead-light">
             <tr>
-              <th>Username</th>
+              <th>Posted By</th>
               <th>Description</th>
-              <th>Duration</th>
               <th>Deadline</th>
               <th>Location</th>
-              <th>Difficulty</th>
-              <th>Urgency</th>
-              <th>Actions</th>
+              <th>Status</th>
+              <th>More Info</th>
             </tr>
           </thead>
           <tbody>

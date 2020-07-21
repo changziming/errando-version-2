@@ -25,7 +25,7 @@ class EditErrand extends Component {
       deadline: new Date(),
       location: '',
       difficulty: '',
-      urgency: '',
+      urgency: ''
     }
   }
 

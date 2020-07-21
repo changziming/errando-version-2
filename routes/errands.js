@@ -2,15 +2,16 @@ const router = require('express').Router();
 let Errands = require('../models/errands.model');
 const auth = require('../middleware/auth');
 
+// Get all Errands
 router.get('/', (req, res) => {
   Errands.find({})
     .then(errands => res.json(errands))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-// MIght need to change the post route
+// Add Errands
 router.post('/add', (req, res) => {
-  const username = req.body.username; // Need to change this part
+  const username = req.body.username; 
   const description = req.body.description;
   const duration = Number(req.body.duration);
   const deadline = Date.parse(req.body.deadline);
@@ -33,18 +34,21 @@ router.post('/add', (req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// Get Errand by id
 router.get('/:id', (req, res) => {
   Errands.findById(req.params.id)
     .then(errands => res.json(errands))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// Delete Errand by id
 router.delete('/:id', (req, res) => {
   Errands.findByIdAndDelete(req.params.id)
     .then(() => res.json('Errand deleted.'))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// Edit Errand by id
 router.post('/update/:id', (req, res) => {
   Errands.findById(req.params.id)
     .then(errands => {
@@ -58,6 +62,22 @@ router.post('/update/:id', (req, res) => {
 
       errands.save()
         .then(() => res.json('Errand updated!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+// Edit Errand status by id
+router.post('/status/:id', (req, res) => {
+  Errands.findById(req.params.id)
+    .then(errands => {
+      errands.status = req.body.status;
+      errands.acceptedBy = req.body.acceptedBy;
+
+      errands.save()
+        .then(() => {
+          res.json(errands) //'Status updated!'
+        })
         .catch(err => res.status(400).json('Error: ' + err));
     })
     .catch(err => res.status(400).json('Error: ' + err));
