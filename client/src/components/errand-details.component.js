@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -121,9 +120,9 @@ class ErrandDetails extends Component {
     const statusLinks = (
       <Fragment>
         <p>
-          <Button to="#" className="mr-3" color="primary" onClick={() => { this.acceptErrand() }}>Accept</Button>
-          <Button to="#" className="mr-3" color="success" onClick={() => { this.completeErrand() }}>Complete</Button>
-          <Button to="#" className="mr-3" color="danger" onClick={() => { this.forfeitErrand() }}>Forfeit</Button>
+          { this.state.errands.status === "Open" ? <Button to="#" className="mr-3" color="primary" onClick={() => { this.acceptErrand() }}>Accept</Button> : null }
+          { this.state.errands.status === "Ongoing" ? <Button to="#" className="mr-3" color="success" onClick={() => { this.completeErrand() }}>Complete</Button> : null }
+          { this.state.errands.status === "Ongoing" ? <Button to="#" className="mr-3" color="danger" onClick={() => { this.forfeitErrand() }}>Forfeit</Button> : null }
         </p>
         { this.state.confirm ? confirmButton : null }
       </Fragment>
