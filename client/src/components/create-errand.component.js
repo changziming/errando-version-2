@@ -165,6 +165,17 @@ class CreateErrand extends Component {
           </select>
         </div>
 
+        <h6> Too Easy - takes less than 10 minutes to complete  <div>
+          <h6> Easy - takes 10 to 25 minutes to complete  <div>
+            <h6> Moderate - takes 30 to 45 minutes to complete  <div> 
+              <h6> Difficult - takes 45 to 60 minutes to complete<div>
+                <h6> Very Difficult - takes more than 60 minutes to complete</h6><div>
+                  <h7> All timings should be an estimate and not inclusive of travel time.
+                    </h7></div></div> </h6></div></h6></div> </h6>
+        </div>
+              
+        </h6>
+
         <div className="form-group"> 
           <label>Urgency: </label>
           <select ref={this.inputRef}
