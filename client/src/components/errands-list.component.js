@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Searchbox from './SearchBox'
 
 const Errands = props => (
   <tr>
@@ -39,10 +40,17 @@ export default class ErrandsList extends Component {
     })
   }
 
+  handleInput = (e) => {
+    this.setState({searchErrand :e.target.value})
+  }
+
   render() {
+
+   
     return (
       <div>
-        <h3>Errands List</h3>
+        <h3>Errands List</h3> 
+        
         <table className="table">
           <thead className="thead-light">
             <tr>
@@ -58,6 +66,7 @@ export default class ErrandsList extends Component {
             { this.errandsList() }
           </tbody>
         </table>
+        
       </div>
     )
   }

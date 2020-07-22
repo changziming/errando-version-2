@@ -4,6 +4,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
+import Searchbox from './SearchBox';
 
 class ErrandDetails extends Component {
   constructor(props) {
@@ -169,6 +170,7 @@ class ErrandDetails extends Component {
             <strong>Status: </strong>{this.state.errands.status}
           </p>
           <br/>
+          <Searchbox/>
         </div>
         { isAuthenticated && this.state.errands.username !== user.username ? statusLinks : null }
       </div>
