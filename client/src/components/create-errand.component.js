@@ -151,30 +151,19 @@ class CreateErrand extends Component {
         </div>
 
         <div className="form-group"> 
-          <label>Difficulty: </label>
+          <label>Difficulty: (Timings should be an estimate and not inclusive of travel time)</label>
           <select ref={this.inputRef}
               required
               className="form-control"
               value={this.state.difficulty}
               onChange={this.onChangeDifficulty}>
-                <option value='Too Easy'>Too Easy</option>
-                <option value="Easy">Easy</option>
-                <option value="Moderate">Moderate</option>
-                <option value="Difficult">Difficult</option>
-                <option value="Very Difficult">Very Difficult</option>
+                <option value='Too Easy'>Too Easy - takes less than 10 minutes to complete</option>
+                <option value="Easy">Easy - takes 10 to 25 minutes to complete</option>
+                <option value="Moderate">Moderate - takes 30 to 45 minutes to complete</option>
+                <option value="Difficult">Difficult - takes 45 to 60 minutes to complete</option>
+                <option value="Very Difficult">Very Difficult - takes more than 60 minutes to complete</option>
           </select>
         </div>
-
-        <h6> Too Easy - takes less than 10 minutes to complete  <div>
-          <h6> Easy - takes 10 to 25 minutes to complete  <div>
-            <h6> Moderate - takes 30 to 45 minutes to complete  <div> 
-              <h6> Difficult - takes 45 to 60 minutes to complete<div>
-                <h6> Very Difficult - takes more than 60 minutes to complete</h6><div>
-                  <h7> All timings should be an estimate and not inclusive of travel time.
-                    </h7></div></div> </h6></div></h6></div> </h6>
-        </div>
-              
-        </h6>
 
         <div className="form-group"> 
           <label>Urgency: </label>

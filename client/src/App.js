@@ -10,7 +10,7 @@ import ErrandsList from "./components/errands-list.component";
 import EditErrand from "./components/edit-errand.component";
 import ErrandDetails from "./components/errand-details.component";
 import CreateErrand from "./components/create-errand.component";
-import CreateUser from "./components/create-user.component";
+import UserDetails from "./components/user-details.component";
 import Homepage from "./components/homepage.component";
 
 export default class App extends Component {
@@ -34,7 +34,7 @@ export default class App extends Component {
           <Route path="/edit/:id" component={EditErrand} />
           <Route path="/details/:id" component={ErrandDetails} />
           <Route path="/create" component={CreateErrand} />
-          <Route path="/user" component={CreateUser} />
+          <Route path="/user/:id" component={UserDetails} />
           </div>
         </Router>
       </Provider>

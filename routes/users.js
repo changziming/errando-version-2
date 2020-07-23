@@ -6,8 +6,15 @@ const jwt = require('jsonwebtoken');
 const auth = require('../middleware/auth');
 
 
+// router.get('/', (req, res) => {
+//   User.find({})
+//     .select('username && email && phoneNumber')
+//     .then(user => res.json(user))
+//     .catch(err => res.status(400).json('Error: ' + err));
+// });
+
 router.get('/', (req, res) => {
-  User.find({})
+  User.findOne(req.query)
     .select('username && email && phoneNumber')
     .then(user => res.json(user))
     .catch(err => res.status(400).json('Error: ' + err));

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import Searchbox from './SearchBox';
+import { Link } from 'react-router-dom';
 
 class ErrandDetails extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class ErrandDetails extends Component {
 
     this.state = { 
       errands: [],
+      user: [],
       status: '',
       acceptedBy: null,
       confirm: false
@@ -25,7 +27,8 @@ class ErrandDetails extends Component {
   }
 
   static propTypes = {
-    auth: PropTypes.object.isRequired
+    isAuthenticated: PropTypes.bool,
+    user: PropTypes.object.isRequired
   }
 
   componentDidMount() {
@@ -48,7 +51,7 @@ class ErrandDetails extends Component {
   completeErrand() {
     this.setState({
       status: "Completed",
-      acceptedBy: this.props.auth.user.id,
+      acceptedBy: this.props.user.id,
       confirm: true
     })
     console.log("Status is now `Completed`")
@@ -66,7 +69,7 @@ class ErrandDetails extends Component {
   acceptErrand() {
     this.setState({
       status: "Ongoing",
-      acceptedBy: this.props.auth.user.id,
+      acceptedBy: this.props.user.id,
       confirm: true
     })
     console.log("Status is now `Ongoing`")
@@ -97,7 +100,7 @@ class ErrandDetails extends Component {
   }
 
   render() {
-    const { isAuthenticated, user } = this.props.auth;
+    //const { isAuthenticated, user } = this.props.auth;
 
     const editLinks = (
       <Fragment>
@@ -111,19 +114,27 @@ class ErrandDetails extends Component {
     const confirmButton = (
       <Fragment>
         <p>
-          <Button color="info" className="ml-5" onClick={() => {
+          <Button color="info" onClick={() => {
             this.changeStatus(this.state.errands._id) }}>Confirm</Button>
           <Button color="info" className="ml-3" onClick={() => this.cancel()}>Cancel</Button>
         </p>
       </Fragment>
     )
 
-    const statusLinks = (
+    const openLink = (
       <Fragment>
         <p>
-          { this.state.errands.status === "Open" ? <Button to="#" className="mr-3" color="primary" onClick={() => { this.acceptErrand() }}>Accept</Button> : null }
-          { this.state.errands.status === "Ongoing" ? <Button to="#" className="mr-3" color="success" onClick={() => { this.completeErrand() }}>Complete</Button> : null }
-          { this.state.errands.status === "Ongoing" ? <Button to="#" className="mr-3" color="danger" onClick={() => { this.forfeitErrand() }}>Forfeit</Button> : null }
+          <Button to="#" className="mr-3" color="primary" onClick={() => { this.acceptErrand() }}>Accept</Button>
+        </p>
+        { this.state.confirm ? confirmButton : null }
+      </Fragment>
+    )
+
+    const ongoingLink = (
+      <Fragment>
+        <p>
+          <Button to="#" className="mr-3" color="success" onClick={() => { this.completeErrand() }}>Complete</Button>
+          <Button to="#" className="mr-3" color="danger" onClick={() => { this.forfeitErrand() }}>Forfeit</Button>
         </p>
         { this.state.confirm ? confirmButton : null }
       </Fragment>
@@ -134,11 +145,11 @@ class ErrandDetails extends Component {
         <div style={{float:"left"}}>
           <h3>Errand Detail</h3> 
         </div> 
-        { isAuthenticated && this.state.errands.username === user.username ? editLinks : null }
+        { this.props.isAuthenticated && this.state.errands.username === this.props.user.username ? editLinks : null }
         <br/>
         <div style={{clear:"left", marginTop:"3rem"}}>
           <p>
-            <strong>Posted By: </strong>{this.state.errands.username}
+            <strong>Posted By: </strong><Link to={"/user/"+this.state.errands.username}>{this.state.errands.username}</Link>
           </p>
           <br/>
           <p>
@@ -169,16 +180,19 @@ class ErrandDetails extends Component {
             <strong>Status: </strong>{this.state.errands.status}
           </p>
           <br/>
-          <Searchbox/>
+            <span>{this.props.user === undefined ? "Yes" : "No"}</span>
         </div>
-        { isAuthenticated && this.state.errands.username !== user.username ? statusLinks : null }
+        { this.state.errands.status === "Open" && this.state.errands.username !== this.props.user.username ? openLink : null }
+        { this.state.errands.status === "Ongoing"  ? ongoingLink : null } 
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  isAuthenticated: state.auth.isAuthenticated,
+  user: state.auth.user
+
 })
 
 export default connect(mapStateToProps, null)(ErrandDetails);
