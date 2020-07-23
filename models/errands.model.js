@@ -10,7 +10,7 @@ const errandsSchema = new Schema({
   location: { type: String, required: true },
   difficulty: { type: String, required: true },
   urgency: { type: String, required: true },
-  acceptedBy: { type: Schema.Types.ObjectId, default: null },
+  acceptedBy: { type: Schema.Types.ObjectId, default: null, ref: "User" },
   status: { type: String, default: "Open" }
 }, {
   timestamps: true,

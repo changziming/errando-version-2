@@ -15,17 +15,17 @@ const auth = require('../middleware/auth');
 
 router.get('/', (req, res) => {
   User.findOne(req.query)
-    .select('username && email && phoneNumber')
+    .select('username && email && phoneNumber && telegramHandle')
     .then(user => res.json(user))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
 // Registering new user
 router.post('/add', (req, res) => {
-  const {username, email, phoneNumber, password} = req.body;
+  const {username, email, phoneNumber, password, telegramHandle} = req.body;
 
   // Validation of new user
-  if(!username || !email || !phoneNumber || !password) {
+  if(!username || !email || !phoneNumber || !telegramHandle || !password) {
     return res.status(400).json({ msg: 'Please enter all fields' })
   }
 
@@ -44,6 +44,7 @@ router.post('/add', (req, res) => {
     username,
     email,
     phoneNumber,
+    telegramHandle,
     password
   })
   newUser.save()

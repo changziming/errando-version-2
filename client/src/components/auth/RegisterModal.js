@@ -22,6 +22,7 @@ class RegisterModal extends Component {
     username: '',
     email: '',
     phoneNumber: '',
+    telegramHandle: '',
     password: '',
     msg: null
   }
@@ -67,13 +68,14 @@ class RegisterModal extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const {username, email, phoneNumber, password} = this.state;
+    const {username, email, phoneNumber, telegramHandle, password} = this.state;
 
     // Create User object
     const newUser = {
       username,
       email,
       phoneNumber,
+      telegramHandle,
       password
     };
 
@@ -120,6 +122,16 @@ class RegisterModal extends Component {
                   type="text"
                   name="phoneNumber"
                   id="phoneNumber"
+                  className="mb-3"
+                  onChange={this.onChange}
+                />
+
+                <Label for="telegramHandle">Telegram Handle</Label>
+                <Input
+                  type="text"
+                  name="telegramHandle"
+                  id="telegramHandle"
+                  placeholder="Eg. @JohnDoe56"
                   className="mb-3"
                   onChange={this.onChange}
                 />

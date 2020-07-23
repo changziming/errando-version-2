@@ -20,6 +20,12 @@ const userSchema = new Schema({
     required: true,
     unique: true
   },
+  telegramHandle: {
+    type: String,
+    required: true,
+    unique: true,
+    default: "@"
+  },
   password: {
     type: String,
     required: true

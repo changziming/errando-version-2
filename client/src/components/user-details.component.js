@@ -22,7 +22,7 @@ class UserDetails extends Component {
         this.setState({ 
           username: response.data.username,
           phoneNumber: response.data.phoneNumber,
-          //telegramHandle: response.data.telegramHandle
+          telegramHandle: response.data.telegramHandle
         })
       })
       .catch((error) => {

@@ -37,7 +37,8 @@ router.post('/login', async (req, res) => {
         id: user._id,
         username: user.username,
         email: user.email,
-        phoneNumber: user.phoneNumber
+        phoneNumber: user.phoneNumber,
+        telegramHandle: user.telegramHandle
       }
     });
   } catch (e) {
@@ -52,10 +53,10 @@ router.post('/login', async (req, res) => {
  */
 
 router.post('/register', async (req, res) => {
-  const { username, email, phoneNumber, password } = req.body;
+  const { username, email, phoneNumber, telegramHandle, password } = req.body;
 
   // Simple validation
-  if (!username || !email || !phoneNumber || !password) {
+  if (!username || !email || !phoneNumber || !telegramHandle || !password) {
     return res.status(400).json({ msg: 'Please enter all fields' });
   }
 
@@ -74,7 +75,11 @@ router.post('/register', async (req, res) => {
   .then(user => {
     if(user) return res.status(400).json({ msg: 'Phone number already exists' });
   });
-
+  
+  User.findOne({telegramHandle})
+  .then(user => {
+    if(user) return res.status(400).json({ msg: 'Telegram handle already exists' });
+  });
 
   try {
     const user = await User.findOne({ email });
@@ -90,6 +95,7 @@ router.post('/register', async (req, res) => {
       username,
       email,
       phoneNumber,
+      telegramHandle,
       password: hash
     });
 
@@ -106,6 +112,7 @@ router.post('/register', async (req, res) => {
         id: savedUser.id,
         username: savedUser.username,
         email: savedUser.email,
+        telegramHandle: savedUser.telegramHandle,
         phoneNumber: savedUser.phoneNumber
       }
     });
