@@ -100,7 +100,7 @@ class ErrandDetails extends Component {
   }
 
   render() {
-    //const { isAuthenticated, user } = this.props.auth;
+    const { isAuthenticated, user } = this.props.auth;
 
     const editLinks = (
       <Fragment>
@@ -129,8 +129,9 @@ class ErrandDetails extends Component {
         { this.state.confirm ? confirmButton : null }
       </Fragment>
     )
-
+ 
     const ongoingLink = (
+    
       <Fragment>
         <p>
           <Button to="#" className="mr-3" color="success" onClick={() => { this.completeErrand() }}>Complete</Button>
@@ -145,7 +146,7 @@ class ErrandDetails extends Component {
         <div style={{float:"left"}}>
           <h3>Errand Detail</h3> 
         </div> 
-        { this.props.isAuthenticated && this.state.errands.username === this.props.user.username ? editLinks : null }
+        { isAuthenticated && this.state.errands.username === user.username ? editLinks : null }
         <br/>
         <div style={{clear:"left", marginTop:"3rem"}}>
           <p>
@@ -180,19 +181,16 @@ class ErrandDetails extends Component {
             <strong>Status: </strong>{this.state.errands.status}
           </p>
           <br/>
-            <span>{this.props.user === undefined ? "Yes" : "No"}</span>
         </div>
-        { this.state.errands.status === "Open" && this.state.errands.username !== this.props.user.username ? openLink : null }
-        { this.state.errands.status === "Ongoing"  ? ongoingLink : null } 
+        { isAuthenticated && this.state.errands.username !== user.username && this.state.errands.status === "Open" ? openLink : null }
+        { isAuthenticated && this.state.errands.status === "Ongoing" && this.state.errands.acceptedBy === user._id ? ongoingLink : null }
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  user: state.auth.user
-
+  auth: state.auth
 })
 
 export default connect(mapStateToProps, null)(ErrandDetails);
