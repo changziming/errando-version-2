@@ -49,7 +49,10 @@ class Navibar extends Component {
     );
 
     const postLink = (
-      <NavLink href="/create" style={{color: "white"}}>Post Errands</NavLink>
+      <Fragment>
+        <NavLink href="/create" className="mr-auto" style={{color: "white"}}>Post Errands</NavLink>
+        { user ? <NavLink href={"/myerrands/"+user._id} className="mr-auto" style={{color: "white"}}>My Errands</NavLink> : null }
+      </Fragment>
     )
 
     return (

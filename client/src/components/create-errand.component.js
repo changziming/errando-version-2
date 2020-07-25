@@ -12,6 +12,7 @@ class CreateErrand extends Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeDuration = this.onChangeDuration.bind(this);
+    this.onChangeRenumeration = this.onChangeRenumeration.bind(this);
     this.onChangeDeadline = this.onChangeDeadline.bind(this);
     this.onChangeLocation = this.onChangeLocation.bind(this);
     this.onChangeDifficulty = this.onChangeDifficulty.bind(this);
@@ -22,6 +23,7 @@ class CreateErrand extends Component {
       username: '',
       description: '',
       duration: 0,
+      renumeration: 0,
       deadline: new Date(),
       location: '',
       difficulty: 'Too Easy',
@@ -48,6 +50,12 @@ class CreateErrand extends Component {
   onChangeDuration(e) {
     this.setState({
       duration: e.target.value
+    })
+  }
+
+  onChangeRenumeration(e) {
+    this.setState({
+      renumeration: e.target.value
     })
   }
 
@@ -82,6 +90,7 @@ class CreateErrand extends Component {
       username: this.props.auth.user.username,
       description: this.state.description,
       duration: this.state.duration,
+      renumeration: this.state.renumeration,
       deadline: this.state.deadline,
       location: this.state.location,
       difficulty: this.state.difficulty,
@@ -132,6 +141,15 @@ class CreateErrand extends Component {
               />
         </div>
         <div className="form-group">
+          <label>Renumeration (in SGD): </label>
+          <input 
+              type="text" 
+              className="form-control"
+              value={this.state.renumeration}
+              onChange={this.onChangeRenumeration}
+              />
+        </div>
+        <div className="form-group">
           <label>Deadline: </label>
           <div>
             <DatePicker
@@ -157,11 +175,11 @@ class CreateErrand extends Component {
               className="form-control"
               value={this.state.difficulty}
               onChange={this.onChangeDifficulty}>
-                <option value='Too Easy'>Too Easy - takes less than 10 minutes to complete</option>
-                <option value="Easy">Easy - takes 10 to 25 minutes to complete</option>
-                <option value="Moderate">Moderate - takes 30 to 45 minutes to complete</option>
-                <option value="Difficult">Difficult - takes 45 to 60 minutes to complete</option>
-                <option value="Very Difficult">Very Difficult - takes more than 60 minutes to complete</option>
+                <option value='Too Easy'>Too Easy - takes less than 30 minutes to complete</option>
+                <option value="Easy">Easy - takes 30 to 60 minutes to complete</option>
+                <option value="Moderate">Moderate - takes 1 to 2 hours to complete</option>
+                <option value="Difficult">Difficult - takes 2 to 3 hours to complete</option>
+                <option value="Very Difficult">Very Difficult - takes more than 3 hours to complete</option>
           </select>
         </div>
 

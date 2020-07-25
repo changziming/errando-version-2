@@ -12,6 +12,7 @@ class EditErrand extends Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeDuration = this.onChangeDuration.bind(this);
+    this.onChangeRenumeration = this.onChangeRenumeration.bind(this);
     this.onChangeDeadline = this.onChangeDeadline.bind(this);
     this.onChangeLocation = this.onChangeLocation.bind(this);
     this.onChangeDifficulty = this.onChangeDifficulty.bind(this);
@@ -22,6 +23,7 @@ class EditErrand extends Component {
       username: '',
       description: '',
       duration: 0,
+      renumeration: 0,
       deadline: new Date(),
       location: '',
       difficulty: '',
@@ -69,6 +71,12 @@ class EditErrand extends Component {
     })
   }
 
+  onChangeRenumeration(e) {
+    this.setState({
+      renumeration: e.target.value
+    })
+  }
+
   onChangeDeadline(date) {
     this.setState({
       date: date
@@ -100,6 +108,7 @@ class EditErrand extends Component {
       username: this.state.username,
       description: this.state.description,
       duration: this.state.duration,
+      renumeration: this.state.renumeration,
       deadline: this.state.deadline,
       location: this.state.location,
       difficulty: this.state.difficulty,
@@ -147,6 +156,15 @@ class EditErrand extends Component {
               className="form-control"
               value={this.state.duration}
               onChange={this.onChangeDuration}
+              />
+        </div>
+        <div className="form-group">
+          <label>Renumeration (in SGD): </label>
+          <input 
+              type="text" 
+              className="form-control"
+              value={this.state.renumeration}
+              onChange={this.onChangeRenumeration}
               />
         </div>
         <div className="form-group">

@@ -14,6 +14,7 @@ router.post('/add', (req, res) => {
   const username = req.body.username; 
   const description = req.body.description;
   const duration = Number(req.body.duration);
+  const renumeration = Number(req.body.renumeration);
   const deadline = Date.parse(req.body.deadline);
   const location = req.body.location;
   const difficulty = req.body.difficulty;
@@ -23,6 +24,7 @@ router.post('/add', (req, res) => {
     username, // And this part
     description,
     duration,
+    renumeration,
     deadline,
     location,
     difficulty,
@@ -55,6 +57,7 @@ router.post('/update/:id', (req, res) => {
       errands.username = req.body.username;// Change this to reference user _id instead
       errands.description = req.body.description;
       errands.duration = Number(req.body.duration);
+      errands.renumeration = Number(req.body.renumeration);
       errands.deadline = Date.parse(req.body.deadline);
       errands.location = req.body.location;
       errands.difficulty = req.body.difficulty;

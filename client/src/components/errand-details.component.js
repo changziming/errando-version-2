@@ -3,7 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
-import Searchbox from './SearchBox';
+import jwt from "jsonwebtoken";
 import { Link } from 'react-router-dom';
 
 class ErrandDetails extends Component {
@@ -19,7 +19,7 @@ class ErrandDetails extends Component {
 
     this.state = { 
       errands: [],
-      user: [],
+      payload: [],
       status: '',
       acceptedBy: null,
       confirm: false
@@ -39,6 +39,10 @@ class ErrandDetails extends Component {
       .catch((error) => {
         console.log(error);
       })
+
+    // verify a token symmetric
+    const payload = jwt.decode(this.props.auth.token)
+    this.setState({payload: payload})
   }
 
   deleteErrands(id) {
@@ -51,7 +55,7 @@ class ErrandDetails extends Component {
   completeErrand() {
     this.setState({
       status: "Completed",
-      acceptedBy: this.props.user.id,
+      acceptedBy: this.state.payload.id,
       confirm: true
     })
     console.log("Status is now `Completed`")
@@ -69,7 +73,7 @@ class ErrandDetails extends Component {
   acceptErrand() {
     this.setState({
       status: "Ongoing",
-      acceptedBy: this.props.user.id,
+      acceptedBy: this.state.payload.id,
       confirm: true
     })
     console.log("Status is now `Ongoing`")
@@ -159,6 +163,10 @@ class ErrandDetails extends Component {
           <br/>
           <p>
             <strong>Duration: </strong>{this.state.errands.duration}
+          </p>
+          <br/>
+          <p>
+            <strong>Renumeration: </strong>{this.state.errands.renumeration}
           </p>
           <br/>
           <p>
