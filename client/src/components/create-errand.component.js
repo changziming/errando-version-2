@@ -141,7 +141,7 @@ class CreateErrand extends Component {
               />
         </div>
         <div className="form-group">
-          <label>Renumeration (in SGD): </label>
+          <label>Remuneration (in SGD): </label>
           <input 
               type="text" 
               className="form-control"
