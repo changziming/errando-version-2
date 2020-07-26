@@ -51,8 +51,8 @@ export default class ErrandsList extends Component {
       <div>
         <h3>Errands List</h3> 
         
-        <table className="table">
-          <thead className="thead-light">
+        <table className="table table-hover">
+          <thead className="thead-dark">
             <tr>
               <th>Posted By</th>
               <th>Description</th>

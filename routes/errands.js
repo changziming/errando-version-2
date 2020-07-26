@@ -5,6 +5,7 @@ const auth = require('../middleware/auth');
 // Get all Errands
 router.get('/', (req, res) => {
   Errands.find({})
+    .populate('acceptedBy')
     .then(errands => res.json(errands))
     .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -39,6 +40,7 @@ router.post('/add', (req, res) => {
 // Get Errand by id
 router.get('/:id', (req, res) => {
   Errands.findById(req.params.id)
+    .populate('acceptedBy')
     .then(errands => res.json(errands))
     .catch(err => res.status(400).json('Error: ' + err));
 });

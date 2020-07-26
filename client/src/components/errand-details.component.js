@@ -22,6 +22,7 @@ class ErrandDetails extends Component {
       payload: [],
       status: '',
       acceptedBy: null,
+      acceptedByUsername: '',
       confirm: false
      };
   }
@@ -35,6 +36,12 @@ class ErrandDetails extends Component {
     axios.get('/errands/'+this.props.match.params.id)
       .then(response => {
         this.setState({ errands: response.data })
+        console.log(this.state.errands)
+        if(response.data.acceptedBy !== null) {
+          this.setState({ acceptedByUsername: response.data.acceptedBy.username })
+        } else {
+          this.setState({ acceptedByUsername: "null" })
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -166,7 +173,7 @@ class ErrandDetails extends Component {
           </p>
           <br/>
           <p>
-            <strong>Renumeration: </strong>{this.state.errands.renumeration}
+            <strong>Remuneration: </strong>{this.state.errands.renumeration}
           </p>
           <br/>
           <p>
@@ -187,6 +194,10 @@ class ErrandDetails extends Component {
           <br/>
           <p>
             <strong>Status: </strong>{this.state.errands.status}
+          </p>
+          <br/>
+          <p>
+            <strong>Accepted By: </strong><Link to={"/user/"+this.state.acceptedByUsername}>{this.state.acceptedByUsername}</Link>
           </p>
           <br/>
         </div>

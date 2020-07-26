@@ -50,8 +50,8 @@ class Navibar extends Component {
 
     const postLink = (
       <Fragment>
-        <NavLink href="/create" className="mr-auto" style={{color: "white"}}>Post Errands</NavLink>
-        { user ? <NavLink href={"/myerrands/"+user._id} className="mr-auto" style={{color: "white"}}>My Errands</NavLink> : null }
+        <NavLink href="/create" className="mr-auto" style={{color: "white", padding: "10px"}}>Post Errands</NavLink>
+        { user ? <NavLink href={"/myerrands/"+user._id} className="mr-auto" style={{color: "white", padding: "10px"}}>My Errands</NavLink> : null }
       </Fragment>
     )
 
@@ -60,7 +60,7 @@ class Navibar extends Component {
         <Navbar color="dark" dark>
           <NavbarBrand href="/">errando</NavbarBrand>
           <Nav className="mr-auto">
-            <NavLink href="/errand" style={{color: "white"}}>Errands</NavLink>
+            <NavLink href="/errand" style={{color: "white", padding: "10px"}}>Errands</NavLink>
             { isAuthenticated ? postLink : null }
           </Nav>
           

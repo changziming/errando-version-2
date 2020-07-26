@@ -91,7 +91,7 @@ class MyErrands extends Component {
            
         <div>
           <h4>My Posted Errands</h4>
-          <table className="table">
+          <table className="table table-hover">
             <thead className="thead-light">
               <tr>
                 <th>Description</th>
@@ -109,7 +109,7 @@ class MyErrands extends Component {
 
         <div>
           <h4>My Accepted Errands</h4>
-          <table className="table">
+          <table className="table table-hover">
             <thead className="thead-light">
               <tr>
                 <th>Posted By</th>
