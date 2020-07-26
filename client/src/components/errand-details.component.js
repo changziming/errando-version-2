@@ -202,7 +202,7 @@ class ErrandDetails extends Component {
           <br/>
         </div>
         { isAuthenticated && this.state.errands.username !== user.username && this.state.errands.status === "Open" ? openLink : null }
-        { isAuthenticated && this.state.errands.status === "Ongoing" && this.state.errands.acceptedBy === user._id ? ongoingLink : null }
+        { isAuthenticated && this.state.errands.status === "Ongoing" && this.state.errands.acceptedBy._id === user._id ? ongoingLink : null }
       </div>
     )
   }
