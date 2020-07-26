@@ -36,6 +36,7 @@ class MyErrands extends Component {
 
     this.state = {
       errands: [],
+      acceptedErrands: [],
       payload: []
       // postedErrands: [],
       // acceptedErrands: []
@@ -64,7 +65,9 @@ class MyErrands extends Component {
   }
 
   acceptedErrandsfilter = (errand) => {
-    return errand.acceptedBy === this.state.payload.id
+    if(errand.acceptedBy!==null) {
+      return errand.acceptedBy._id === this.state.payload.id
+    }
   }
 
   postedErrandsList = () => {
