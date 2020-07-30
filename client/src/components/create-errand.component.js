@@ -61,7 +61,7 @@ class CreateErrand extends Component {
 
   onChangeDeadline(date) {
     this.setState({
-      date: date
+      deadline: date
     })
   }
 
